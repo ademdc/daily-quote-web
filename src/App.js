@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [quote, setQuote] = useState({})
+  const [quote, setQuote] = useState(null)
 
   useEffect(() => {
     console.log('inside');
@@ -21,11 +21,15 @@ function App() {
   console.log(quote)
   return (
     <div className="App">
-      <header className="App-header">
-        <p>{quote.text}</p>
-        <img src={quote.image_url}></img>
-        <p>{quote.author}</p>
-      </header>
+      { quote && 
+        (
+          <header className="App-header">
+          <p>{quote.text}</p>
+          <img src={quote.image_url}></img>
+          <p>{quote.author}</p>
+        </header>
+        )
+      }
     </div>
   );
 }
