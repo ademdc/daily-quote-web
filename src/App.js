@@ -1,23 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [quote, setQuote] = useState({})
+
+  useEffect(() => {
+    console.log('inside');
+
+    axios.get('https://afternoon-harbor-81797.herokuapp.com/quotes/daily')
+			.then(quote => {
+        setQuote(quote.data)
+			})
+			.catch(error => {
+				console.log(error)
+				return false;
+		  })
+  }, []) 
+    
+  console.log(quote)
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>{quote.text}</p>
+        <img src={quote.image_url}></img>
+        <p>{quote.author}</p>
       </header>
     </div>
   );
