@@ -1,38 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from './components/navbar/Navbar';
+import Home from './components/screens/Home/Home';
+import Favorites from './components/screens/Favorites/Favorites';
+import Auth from './components/screens/Auth/Auth';
+import Logout from './components/screens/Auth/Logout';
+import * as authActions from './store/actions/auth';
 
 function App() {
-  const [quote, setQuote] = useState(null)
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token)
+
+  async function tryLogin() {
+    await dispatch(authActions.checkAutoLogin())
+  }
 
   useEffect(() => {
-    console.log('inside');
+    tryLogin();
+  }, []);
 
-    axios.get('https://afternoon-harbor-81797.herokuapp.com/quotes/daily')
-			.then(quote => {
-        setQuote(quote.data)
-			})
-			.catch(error => {
-				console.log(error)
-		  })
-  }, [])
-
-
+  let routes = (
+    <Switch>
+        <Route path='/logout' component={Logout} />
+        <Route path='/auth' component= {Auth}/>
+        <Route path='/favorites' component= {Favorites}/>
+        <Route path='/' exact component= {Home}/>
+        <Redirect to='/'/>
+    </Switch>
+);
   return (
     <div className="App">
-      <Navbar />
-      { quote &&
-        (
-          <header className="App-header">
-          <p>{quote.text}</p>
-          <img src={quote.image_url} alt=''></img>
-          <p>{quote.author}</p>
-        </header>
-        )
-      }
+      <Navbar isAuthenticated={token}>
+        {routes}
+      </Navbar>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

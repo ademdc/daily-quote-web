@@ -1,15 +1,17 @@
 import React from 'react';
 import './NavItem.css';
+import { NavLink } from 'react-router-dom';
 
 const NavItem = (props) => {
   return(
     <li className="nav-item">
-      <a href={props.href} className="nav-link">
-      <i class="fas fa-home"></i>
-      {props.svg}
-      <span className="link-text">{props.text}</span>
-      </a>
-      
+    <NavLink
+      className="nav-link"
+      to={props.href}
+      exact> 
+        {props.svg}
+        <span className="link-text">{props.text}</span>
+      </NavLink>
     </li>
   );
 }
