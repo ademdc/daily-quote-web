@@ -47,7 +47,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .all {
+  .favorites {
     padding-left: 0px;
   }
   .quote-container {
