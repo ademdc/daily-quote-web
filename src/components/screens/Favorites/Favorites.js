@@ -6,7 +6,7 @@ import './Favorites.css';
 
 const favoriteQuote = (quote) => {
   return (
-    <div data-id={quote.id} className='quote-container'>
+    <div data-id={quote.id} key={quote.id} className='quote-container'>
       <div className='quote-image-container'>
         <img className='all-quote-image' src={quote.image_url} alt=''></img>
       </div>
@@ -33,7 +33,7 @@ const Favorites = props => {
   
   if(!token) {
     return (
-      <div className="favorites">
+      <div className="centered">
         <p>Log in to see favorites.</p>
       </div>
     )

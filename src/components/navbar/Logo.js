@@ -4,8 +4,9 @@ import './NavItem.css';
 const Logo = props => {
   return(
     <li className="logo">
-      <a href="#" className="nav-link">
+      <a href="#" className="nav-link" style={{textAlign: 'center'}}>
         <span className="link-text logo-text">Mašnica</span>
+        {/* <span style={{textAlign: 'center'}} className="link-text logo-text"><img height='100px' src={process.env.PUBLIC_URL + '/logo192.png'}></img></span> */}
         <svg
           aria-hidden="true"
           focusable="false"

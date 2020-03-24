@@ -1,6 +1,7 @@
 .home {
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -19,4 +20,14 @@
 
 .favorite-button {
   margin-bottom: 100px;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f4c2c2;
+  color: white;
+}
+
+.favorite-button:hover {
+  background-color: #CFDBE1;
+  color: black;
 }

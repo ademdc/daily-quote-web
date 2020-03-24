@@ -4,6 +4,7 @@ import './Home.css';
 import { useSelector, useDispatch } from 'react-redux';
 import * as quoteActions from '../../../store/actions/quote';
 import FlashMessage from 'react-flash-message'
+import * as svgs from '../../UI/svgs';
 
 const Message = (text) => (
   <FlashMessage duration={5000}>
@@ -38,7 +39,7 @@ const Home = props => {
             <img className='quote-image' src={quote.image_url} alt=''></img>
             <p>{quote.author}</p>
             {token && (
-              <button className='favorite-button' onClick={() => setAsFavorite(quote)}>Set as favorite!</button>
+              <button className='favorite-button' onClick={() => setAsFavorite(quote)}>Add to favorites</button>
             )}
             
         </div>

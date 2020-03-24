@@ -7,11 +7,9 @@ export const LOGOUT = 'LOGOUT';
 export const SET_PUSH_TOKEN = 'SET_PUSH_TOKEN'
 export const AUTHENTICATE = 'AUTHENTICATE'
 
-export const authenticate = (userId, token) => {
+export const authenticate = (userId, token, user) => {
 	console.log('IN AUTHENTICATE ACTION')
-	console.log(userId)
-	console.log(token)
-  return { type: AUTHENTICATE, userId: userId, token: token };
+  return { type: AUTHENTICATE, userId: userId, token: token, user: user };
 };
 
 export const login = (email, password) => {
@@ -24,8 +22,8 @@ export const login = (email, password) => {
 		}
 		console.log("IN SUCCESS LOGIN")
 
-		dispatch(authenticate(response.data.userId, response.data.jwt));
-		saveDataToStorage(response.data.jwt, response.data.userId);
+		dispatch(authenticate(response.data.userId, response.data.jwt, response.data.user));
+		saveDataToStorage(response.data.jwt, response.data.userId, response.data.user);
 	}
 }
 
@@ -39,8 +37,8 @@ export const signUp = (email, password) => {
 		}
 		console.log("IN SUCCESS SIGUNP")
 
-		dispatch(authenticate(response.data.userId, response.data.jwt))
-		saveDataToStorage(response.data.jwt, response.data.userId);
+		dispatch(authenticate(response.data.userId, response.data.jwt, response.data.user))
+		saveDataToStorage(response.data.jwt, response.data.userId, response.data.user);
 	}
 }
 
@@ -70,9 +68,10 @@ export const logout = () => {
 	}
 	
 }
-const saveDataToStorage = (token, userId) => {
+const saveDataToStorage = (token, userId, user) => {
 	localStorage.setItem('token', token);
 	localStorage.setItem('userId', userId);
+	localStorage.setItem('user', JSON.stringify(user));
 };
 
 export const checkAutoLogin = () =>{
@@ -82,7 +81,8 @@ export const checkAutoLogin = () =>{
 				dispatch(logout());
 		}else{
 			const userId = localStorage.getItem('userId');
-			dispatch(authenticate(userId, token));				
+			const user = JSON.parse(localStorage.getItem('user'));
+			dispatch(authenticate(userId, token, user));				
 		}
 	}
 }

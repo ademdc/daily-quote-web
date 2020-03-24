@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './New.css';
 import * as quoteActions from '../../../store/actions/quote';
 import { useSelector, useDispatch } from 'react-redux';
+import NotAuhtorized from '../../../components/UI/NotAuthorized';
 
 const Auth = (props) => {
   const [category, setCategory] = useState('');
@@ -10,7 +11,7 @@ const Auth = (props) => {
 	const [quoteText, setQuoteText] = useState('');
   const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-  const token = useSelector(state => state.auth.token);
+  const user = useSelector(state => state.auth.user);
   
 	const dispatch = useDispatch();
 
@@ -29,6 +30,12 @@ const Auth = (props) => {
 				setError(error.message);
         setIsLoading(false);
 			}) 
+    }
+
+    if(user) {
+      if(!user.is_admin) {
+        return <NotAuhtorized />
+      }
     }
 
   return(
