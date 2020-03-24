@@ -30,13 +30,17 @@ const Home = props => {
 
   return(
     <div className="home">
+      {/* <img height='150px' src={process.env.PUBLIC_URL + '/logo192.png'} alt=''></img> */}
       { quote &&
         (
           <div >
             <p className='quote'>{quote.text}</p>
             <img className='quote-image' src={quote.image_url} alt=''></img>
             <p>{quote.author}</p>
-            <button className='favorite-button' onClick={() => setAsFavorite(quote)}>Set as favorite!</button>
+            {token && (
+              <button className='favorite-button' onClick={() => setAsFavorite(quote)}>Set as favorite!</button>
+            )}
+            
         </div>
         )
       }
