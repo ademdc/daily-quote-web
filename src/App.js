@@ -8,6 +8,9 @@ import Home from './components/screens/Home/Home';
 import Favorites from './components/screens/Favorites/Favorites';
 import Auth from './components/screens/Auth/Auth';
 import Logout from './components/screens/Auth/Logout';
+import New from './components/screens/New/New';
+import All from './components/screens/All/All';
+
 import * as authActions from './store/actions/auth';
 
 function App() {
@@ -25,6 +28,8 @@ function App() {
   let routes = (
     <Switch>
         <Route path='/logout' component={Logout} />
+        <Route path='/all' component={All} />
+        <Route path='/new' component={New} />
         <Route path='/auth' component= {Auth}/>
         <Route path='/favorites' component= {Favorites}/>
         <Route path='/' exact component= {Home}/>

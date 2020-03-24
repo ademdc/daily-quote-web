@@ -3,7 +3,13 @@ import axios from 'axios';
 import './Home.css';
 import { useSelector, useDispatch } from 'react-redux';
 import * as quoteActions from '../../../store/actions/quote';
+import FlashMessage from 'react-flash-message'
 
+const Message = (text) => (
+  <FlashMessage duration={5000}>
+    <strong>I will disapper in 5 seconds!</strong>
+  </FlashMessage>
+)
 const Home = props => {
   const token = useSelector(state => state.auth.token);
   const quote = useSelector(state => state.quote.quote);
@@ -19,6 +25,7 @@ const Home = props => {
 
   const setAsFavorite = (quote) => {
     dispatch(quoteActions.setFavoriteQuote(quote))
+    Message()
   }
 
   return(
@@ -26,10 +33,10 @@ const Home = props => {
       { quote &&
         (
           <div >
-            <p>{quote.text}</p>
-            <img src={quote.image_url} alt=''></img>
+            <p className='quote'>{quote.text}</p>
+            <img className='quote-image' src={quote.image_url} alt=''></img>
             <p>{quote.author}</p>
-            <button onClick={() => setAsFavorite(quote)}>Set as favorite!</button>
+            <button className='favorite-button' onClick={() => setAsFavorite(quote)}>Set as favorite!</button>
         </div>
         )
       }

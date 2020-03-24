@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as quoteActions from '../../../store/actions/quote';
 
-import './Favorites.css';
+import './All.css';
 
-const favoriteQuote = (quote) => {
+const quoteRendered = (quote) => {
   return (
     <div data-id={quote.id} className='quote-container'>
       <div className='quote-image-container'>
@@ -15,14 +15,14 @@ const favoriteQuote = (quote) => {
     </div>
   )
 }
-const Favorites = props => {
+const All = props => {
   let token = useSelector(state => state.auth.token)
-	let favoriteQuotes = useSelector(state => state.quote.favoriteQuotes)
+	let allQuotes = useSelector(state => state.quote.allQuotes)
 
 	const dispatch = useDispatch();
 
   async function getFavQuotes() {
-    dispatch(quoteActions.getFavoriteQuotes());
+    dispatch(quoteActions.getAllQuotes());
   }
 
 	useEffect(() => {
@@ -33,16 +33,16 @@ const Favorites = props => {
   
   if(!token) {
     return (
-      <div className="favorites">
+      <div className="all">
         <p>Log in to see favorites.</p>
       </div>
     )
   }
   return(
-    <div className="favorites">
-      {favoriteQuotes.map(quote=> favoriteQuote(quote))}
+    <div className="all">
+      {allQuotes.map(quote=> quoteRendered(quote))}
     </div>
   );
 }
 
-export default Favorites;
+export default All;

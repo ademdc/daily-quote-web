@@ -1,23 +1,24 @@
-import { GET_QUOTES, GET_RANDOM_QUOTE, GET_FAVORITE_QUOTES, SET_FAVORITE_QUOTE } from '../actions/quote';
+import { GET_ALL_QUOTES, GET_RANDOM_QUOTE, GET_FAVORITE_QUOTES, SET_FAVORITE_QUOTE, CREATE_NEW_QUOTE } from '../actions/quote';
 
 const innitialState = {
 	quote: null,
 	favoriteQuotes: [],
 	quotes: [],
-	loading: false,
-	error: null
+	allQuotes: []
 }
 
 const quoteReducer = (state = innitialState, action) => {
     switch(action.type) {
-      case GET_QUOTES:
-				return { ...state, quotes: action.quotes, quote: action.quote  }
+      case GET_ALL_QUOTES:
+				return { ...state, allQuotes: action.allQuotes }
 			case GET_RANDOM_QUOTE:
 				return { ...state, quote: action.quote }
 			case GET_FAVORITE_QUOTES:
 				return { ...state, favoriteQuotes: action.favoriteQuotes }
 			case SET_FAVORITE_QUOTE:
 				return { ...state, favoriteQuotes: [...state.favoriteQuotes, action.favoriteQuote] }
+			case CREATE_NEW_QUOTE:
+				return state;
 			default:
 				return state;
     }

@@ -44,14 +44,17 @@ const Auth = (props) => {
   return(
     <div className='auth'>
       <p>{token}</p>
-          <input className='input' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
-          <input className='input' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
+        <div className='form-group'>
+          <input className='input' type='text' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+          <input className='input' type='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
           <button className='button' onClick={authHandler}>{isSignup ? 'SIGNUP' : 'SIGNIN'}</button>
-       
-      <button
+        </div>
+        <button
           className='button'
           onClick={() => setIsSignup(prevState => !prevState)}
-          >SWITCH TO {isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
+          >SWITCH TO {isSignup ? 'SIGNIN' : 'SIGNUP'}
+        </button>
+          
     </div>
    
   );

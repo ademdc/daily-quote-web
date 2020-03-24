@@ -9,3 +9,14 @@
   color: white;
 }
 
+.quote {
+  padding: 40px 30px;
+}
+
+.quote-image {
+  width: 100%;
+}
+
+.favorite-button {
+  margin-bottom: 100px;
+}
