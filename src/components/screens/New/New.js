@@ -3,6 +3,7 @@ import './New.css';
 import * as quoteActions from '../../../store/actions/quote';
 import { useSelector, useDispatch } from 'react-redux';
 import NotAuhtorized from '../../../components/UI/NotAuthorized';
+import { useAlert } from 'react-alert'
 
 const Auth = (props) => {
   const [category, setCategory] = useState('');
@@ -12,7 +13,7 @@ const Auth = (props) => {
   const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state.auth.user);
-  
+  const alert = useAlert()
 	const dispatch = useDispatch();
 
 	const newQuoteHandler = () => {
@@ -25,6 +26,7 @@ const Auth = (props) => {
 		dispatch(action)
 			.then(response => {
         setIsLoading(false);
+        alert.success('Succesfully created new quote.')
         props.history.push('/');
 			}).catch(error => {
 				setError(error.message);

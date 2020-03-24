@@ -5,16 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as quoteActions from '../../../store/actions/quote';
 import FlashMessage from 'react-flash-message'
 import * as svgs from '../../UI/svgs';
+import { useAlert } from 'react-alert'
 
-const Message = (text) => (
-  <FlashMessage duration={5000}>
-    <strong>I will disapper in 5 seconds!</strong>
-  </FlashMessage>
-)
 const Home = props => {
   const token = useSelector(state => state.auth.token);
   const quote = useSelector(state => state.quote.quote);
   const dispatch = useDispatch();
+  const alert = useAlert()
 
   async function getDailyQuote() {
     dispatch(quoteActions.getDailyQuote());
@@ -26,7 +23,7 @@ const Home = props => {
 
   const setAsFavorite = (quote) => {
     dispatch(quoteActions.setFavoriteQuote(quote))
-    Message()
+    alert.show('Succesfully set as favorite')
   }
 
   return(

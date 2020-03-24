@@ -6,12 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import { Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import { alertOptions } from './contants/configuration';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App/>
+        <AlertProvider template={AlertTemplate} {...alertOptions}>
+          <App/>
+        </AlertProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

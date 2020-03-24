@@ -3,6 +3,7 @@ import './Auth.css';
 import * as authActions from '../../../store/actions/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 const Auth = (props) => {
   const [email, setEmail] = useState('');
@@ -10,16 +11,15 @@ const Auth = (props) => {
 	const [error, setError] = useState(false);
 	const [isSignup, setIsSignup] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const token = useSelector(state => state.auth.token);
+  const token = useSelector(state => state.auth.token);
+  const alert = useAlert()
 	const dispatch = useDispatch();
 
 	const authHandler = () => {
 		let action;
     if (isSignup) {
-			console.log('is signup')
       action = authActions.signUp(email, password)
     } else {
-			console.log('is signin')
       action = authActions.login(email, password)
     }
     
@@ -31,6 +31,7 @@ const Auth = (props) => {
 			.then(response => {
 				console.log(response)
         setIsLoading(false);
+        alert.success('Successfully authenticated.')
         props.history.push('/');
 			}).catch(error => {
 				console.log('IN CATCH OF DISPATCH auth actions')
