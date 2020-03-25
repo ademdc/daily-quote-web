@@ -1,3 +1,17 @@
 .button {
   border-radius: 10px;
 }
+
+.red-bg {
+  background-color: red;
+  color: white;
+}
+
+.red-bg:hover {
+  opacity: 0.5;
+  color: white;
+}
+
+input, textarea {
+  border-radius: 10px;
+}

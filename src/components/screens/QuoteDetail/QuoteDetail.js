@@ -2,23 +2,26 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import './QuoteDetail.css';
+import DateTimePicker from 'react-datetime-picker';
+import Modal from 'react-modal';
+import { dayDifference } from '../../../helpers/dateHelper';
+import { customModalStyles } from '../../../contants/configuration';
 
+import './QuoteDetail.css';
 import * as quoteActions from '../../../store/actions/quote';
 
 const QuoteDetail = props => {
   const { id } = useParams()
   const currentQuote = useSelector(state => state.quote.currentQuote);
-  const [newCategory, setNewCategory] = useState('');
-	const [newAuthor, setNewAuthor] = useState('');
-	const [newQuoteText, setNewQuoteText] = useState('');
-  const [newImageUrl, setNewImageUrl] = useState('')
   const [editedQuote, setEditedQuote] = useState(null)
+  const [date, setDate] = useState(new Date())
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch();
   const alert = useAlert()
 
   useEffect(() => {
     dispatch(quoteActions.getQuote(id))
+    Modal.setAppElement('#modal')
   },[])
 
   useEffect(() => {
@@ -33,7 +36,11 @@ const QuoteDetail = props => {
     props.history.push('/quotes')
   }
   const setDailyHandler = async () => {
-    await dispatch(quoteActions.setNewDailyQuote(currentQuote.id))
+    const days_from_now = dayDifference(new Date(), date)
+    console.log(new Date())
+    console.log(date)
+    console.log(days_from_now)
+    await dispatch(quoteActions.setNewDailyQuote(currentQuote.id, days_from_now))
     alert.success('Successfully set quote as daily.')
     props.history.push('/')
   }
@@ -43,7 +50,16 @@ const QuoteDetail = props => {
     alert.success('Successfully deleted quote.')
     props.history.push('/quotes')
   }
+  const onChange = date => setDate(date)
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  }
+   
   return(
     <div className='centered-column'>
       {currentQuote && editedQuote && (
@@ -91,12 +107,32 @@ const QuoteDetail = props => {
               } 
             />
             <button className='button' onClick={editQuoteHandler}>Save</button>
-            <button className='button' onClick={setDailyHandler}>Set as Daily</button>
-            <button style={{backgroundColor: 'red'}} className='button' onClick={deleteQuoteHandler}>Delete</button>
+            <button className='button' onClick={openModal}>Set as Daily</button>
+           
+            <button className='button red-bg' onClick={deleteQuoteHandler}>Delete</button>
           </div>  
         </Fragment>
         
       )}
+      <div id='modal'>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customModalStyles}
+          contentLabel="Example Modal"
+        >
+          <h2>Set this quote for certain day</h2>
+          <button onClick={closeModal}>close</button>
+          <form>
+          <DateTimePicker
+              onChange={(e) => onChange(e)}
+              value={date}
+            />
+            <button className='button' onClick={setDailyHandler}>Set as Daily</button>
+          </form>
+        </Modal>
+      </div>
+        
     </div>
   );
 }

@@ -182,10 +182,11 @@ export const setFavoriteQuote = (quote) => {
 	}
 }
 
-export const setNewDailyQuote = (id) => {
+export const setNewDailyQuote = (id, days_from_now) => {
 	return (dispatch, getState) => {
 		axios.post(URLs.base.concat(`/quotes/${id}/set_daily/`), {
 			user_id:  getState().auth.userId,
+			days_from_now: days_from_now
 		}, {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
