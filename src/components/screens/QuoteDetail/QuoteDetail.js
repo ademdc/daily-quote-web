@@ -61,9 +61,13 @@ const QuoteDetail = props => {
   }
    
   return(
-    <div className='centered-column'>
+    <div className={`centered-column`}>
       {currentQuote && editedQuote && (
         <Fragment>
+          {editedQuote.daily_for_date && (
+            <h4>This was daily quote for {editedQuote.daily_for_date}</h4>
+          )}
+          
           <div style={{overflow: 'hidden', height: 'auto', width: '50%'}}>
             <img width='100%' height='100%' src={editedQuote.image_url}></img>
           </div>
@@ -106,10 +110,11 @@ const QuoteDetail = props => {
                 setEditedQuote(prevState => ({...prevState, image_url: value }))} 
               } 
             />
-            <button className='button' onClick={editQuoteHandler}>Save</button>
-            <button className='button' onClick={openModal}>Set as Daily</button>
-           
-            <button className='button red-bg' onClick={deleteQuoteHandler}>Delete</button>
+            <div className='flex-center-all'>
+              <button className='button' onClick={editQuoteHandler}>Save</button>
+              <button className='button' onClick={openModal}>Set as Daily</button>
+              <button className='button red-bg' onClick={deleteQuoteHandler}>Delete</button>
+            </div>
           </div>  
         </Fragment>
         

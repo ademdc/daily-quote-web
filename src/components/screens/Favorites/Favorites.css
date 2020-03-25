@@ -78,6 +78,10 @@
   .quote-container {
     width: 100%;
   }
+
+  .centered-column {
+    padding-bottom: 50px;
+  }
 }
 
 .favorite-button {
