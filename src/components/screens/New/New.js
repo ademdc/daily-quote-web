@@ -41,14 +41,19 @@ const Auth = (props) => {
     }
 
   return(
-    <div className='new'>
+    <div className='new centered-column'>
         <div className='form-group'>
           <input className='input' type='text' placeholder='Category' value={category} onChange={e => setCategory(e.target.value)}/>
           <input className='input' type='text' placeholder='Author' value={author} onChange={e => setAuthor(e.target.value)}/>
           <textarea cols={10} className='text-area-input' type='text' placeholder='Text' value={quoteText} onChange={e => setQuoteText(e.target.value)}/>
           <input className='input' type='text' placeholder='Image URL' value={imageUrl} onChange={e => setImageUrl(e.target.value)}/>
           <button className='button' onClick={newQuoteHandler}>Create new</button>
-        </div>          
+        </div>
+        {imageUrl && (
+            <div style={{overflow: 'hidden', height: 'auto', width: '50%'}}>
+              <img width='100%' height='100%' src={imageUrl}></img>
+           </div>
+          )}          
     </div>
    
   );

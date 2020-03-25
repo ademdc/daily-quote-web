@@ -54,6 +54,17 @@
   color: white;
 }
 
+.centered-column {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282c34;
+  flex:1;
+  min-height: 100vh;
+  color: white;
+}
+
 @media screen and (max-width: 1000px) {
   .quote-container {
     width: 50%;

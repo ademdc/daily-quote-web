@@ -10,6 +10,7 @@ import Auth from './components/screens/Auth/Auth';
 import Logout from './components/screens/Auth/Logout';
 import New from './components/screens/New/New';
 import All from './components/screens/All/All';
+import QuoteDetail from './components/screens/QuoteDetail/QuoteDetail';
 
 import * as authActions from './store/actions/auth';
 
@@ -28,7 +29,8 @@ function App() {
   let routes = (
     <Switch>
         <Route path='/logout' component={Logout} />
-        <Route path='/all' component={All} />
+        <Route path='/quotes/:id' component={QuoteDetail} />
+        <Route path='/quotes' component={All} />
         <Route path='/new' component={New} />
         <Route path='/auth' component= {Auth}/>
         <Route path='/favorites' component= {Favorites}/>

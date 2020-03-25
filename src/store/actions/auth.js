@@ -63,6 +63,7 @@ export const logout = () => {
 	return dispatch => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userId');
+		localStorage.removeItem('user');
 
 		return dispatch({ type: LOGOUT });
 	}
