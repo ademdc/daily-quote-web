@@ -201,7 +201,6 @@ export const setNewDailyQuote = (id, days_from_now) => {
 			})
 			.catch(error => {
 				console.log(error)
-				return false;
 		});
 	}
 }

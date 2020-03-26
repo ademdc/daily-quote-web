@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const QuoteList = props => {
   const { quote } = props
   
-  return(
+  return (
     <div key={quote.id} data-id={quote.id} className='quote-container'>
     <NavLink to={`/quotes/${quote.id}`}>
       <div className='quote-image-container'>
