@@ -8,7 +8,7 @@ const QuoteCategories = props => {
       <h5>All: {props.quotes.length}</h5>
       <h5>Active: {props.quotes.filter(quote => quote.daily_for_date == null).length}</h5>
       {Object.values(quoteCategories).map(category => {
-        return <QuoteCategory category={category} quotes={props.quotes}/>
+        return <QuoteCategory key={category} category={category} quotes={props.quotes}/>
       })}
     </div>
   );

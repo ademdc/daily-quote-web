@@ -6,6 +6,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 import { dayDifference } from '../../../helpers/dateHelper';
 import { customModalStyles } from '../../../contants/configuration';
+import MasnicaSelect from '../../UI/MasnicaSelect';
 
 import './QuoteDetail.css';
 import * as quoteActions from '../../../store/actions/quote';
@@ -59,7 +60,7 @@ const QuoteDetail = props => {
   const closeModal = () => {
     setModalIsOpen(false);
   }
-   
+
   return(
     <div className={`centered-column`}>
       {currentQuote && editedQuote && (
@@ -73,15 +74,12 @@ const QuoteDetail = props => {
           </div>
           
           <div className='form-group' style={{width: '50%'}}>
-            <input 
-              className='input' 
-              type='text' 
-              value={editedQuote.category} 
+            <MasnicaSelect 
+              value={editedQuote.category}
               onChange={(e) => {
                 const value = e.target.value
-                setEditedQuote(prevState => ({...prevState, category: value }))} 
-              }
-            />
+                setEditedQuote(prevState => ({...prevState, category: value }))}}  
+              />
             <input 
               className='input' 
               type='text' 
