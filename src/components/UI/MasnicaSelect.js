@@ -2,7 +2,6 @@ import React from 'react';
 import { quoteCategories } from '../../helpers/quoteHelper';
 
 const MasnicaSelect = props => {
-  console.log(props.category)
   return(
     <select style={style} onChange={props.onChange} value={props.value}>
       {Object.values(quoteCategories).map(category => {

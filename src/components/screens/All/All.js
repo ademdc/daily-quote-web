@@ -6,6 +6,7 @@ import './All.css';
 import QuoteList from '../../QuoteList';
 import QuoteCategories from '../../QuoteCategories';
 import { setFilters } from '../../../helpers/quoteHelper';
+import { renderIfNotAuthorized } from '../../../helpers/authHelper';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
@@ -21,6 +22,7 @@ const All = props => {
   }
 
 	useEffect(() => {
+    
 		if(token) {
       getAllQuotes()
 		}

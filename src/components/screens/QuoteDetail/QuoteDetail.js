@@ -5,6 +5,7 @@ import { useAlert } from 'react-alert';
 import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 import { dayDifference } from '../../../helpers/dateHelper';
+import { redirectIfNotAuthorized } from '../../../helpers/authHelper';
 import { customModalStyles } from '../../../contants/configuration';
 import MasnicaSelect from '../../UI/MasnicaSelect';
 
@@ -14,6 +15,7 @@ import * as quoteActions from '../../../store/actions/quote';
 const QuoteDetail = props => {
   const { id } = useParams()
   const currentQuote = useSelector(state => state.quote.currentQuote);
+  const user = useSelector(state => state.auth.user);
   const [editedQuote, setEditedQuote] = useState(null)
   const [date, setDate] = useState(new Date())
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -21,6 +23,7 @@ const QuoteDetail = props => {
   const alert = useAlert()
 
   useEffect(() => {
+    redirectIfNotAuthorized(user, props)
     dispatch(quoteActions.getQuote(id))
     Modal.setAppElement('#modal')
   },[])
