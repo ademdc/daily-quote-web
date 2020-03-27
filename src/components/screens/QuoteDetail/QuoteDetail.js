@@ -83,7 +83,7 @@ const QuoteDetail = props => {
             <input 
               className='input' 
               type='text' 
-              value={editedQuote.author} 
+              value={editedQuote.author || ''} 
               onChange={(e) => {
                 const value = e.target.value
                 setEditedQuote(prevState => ({...prevState, author: value }))} 
@@ -102,7 +102,7 @@ const QuoteDetail = props => {
             <input 
               className='input' 
               type='text' 
-              value={editedQuote.image_url} 
+              value={editedQuote.image_url || ''} 
               onChange={(e) => {
                 const value = e.target.value
                 setEditedQuote(prevState => ({...prevState, image_url: value }))} 

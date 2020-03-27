@@ -32,9 +32,7 @@ const All = props => {
   return(
     <div className="all">
       <div style={{width: '80%'}}>
-        <hr />
         <QuoteCategories quotes={allQuotes} />
-        <hr />
       </div>
       <div className='quote-list-container'>
         <QuoteList quotes={allQuotes}/>
