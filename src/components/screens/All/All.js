@@ -5,6 +5,7 @@ import NotAuhtorized from '../../../components/UI/NotAuthorized';
 import './All.css';
 import QuoteList from '../../QuoteList';
 import QuoteCategories from '../../QuoteCategories';
+import { setFilters } from '../../../helpers/quoteHelper';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
@@ -31,25 +32,15 @@ const All = props => {
     }
   }
 
-  const setFilters = (categoryFilter) => {
-
-    let filtered = null
-
-    if(categoryFilter == 'All'){
-       filtered = allQuotes
-    }else if (categoryFilter == 'Active') {
-      filtered = allQuotes.filter(quote => quote.daily_for_date == null)
-    }else {
-      filtered = allQuotes.filter(quote => quote.category == categoryFilter)
-    }
-    
+  const setFiltersHandler = (categoryFilter) => {
+    const filtered = setFilters(allQuotes, categoryFilter)
     setFilteredQuotes(filtered)
   }
 
   return(
     <div className="all">
       <div style={{width: '80%', margin: '10px 0px'}}>
-        <QuoteCategories quotes={allQuotes} handleFiltering={setFilters} />
+        <QuoteCategories quotes={allQuotes} handleFiltering={setFiltersHandler} hasActive={true}/>
       </div>
       <div className='quote-list-container'>
         { filteredQuotes.length > 0 ? (<QuoteList quotes={filteredQuotes}/>) : (<QuoteList quotes={allQuotes}/>) }
