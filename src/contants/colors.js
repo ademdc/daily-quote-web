@@ -9,12 +9,13 @@ export const colors = {
     babyRose: '#f4c2c2',
     lightRed: '#ff726f',
     white: '#fff',
-    lightGreen: '#9dffb9'
+    lightGreen: '#9dffb9',
+    darkGreen: '#00876f'
 }
 
 export const categoryColors = {
     'Love': colors.lightRed,
     'Traveling': colors.blueLight,
     'Motivational': colors.lightGreen,
-    'Religion': colors.white
+    'Religion': colors.darkGreen
 }

@@ -8,7 +8,9 @@ import QuoteCategories from '../../QuoteCategories';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
-	let allQuotes = useSelector(state => state.quote.allQuotes)
+  let allQuotes = useSelector(state => state.quote.allQuotes)
+  const [filteredQuotes, setFilteredQuotes] = useState([])
+  const [activeFilter, setActiveFilter] = useState('All')
   const user = useSelector(state => state.auth.user);
 
 	const dispatch = useDispatch();
@@ -29,13 +31,28 @@ const All = props => {
     }
   }
 
+  const setFilters = (categoryFilter) => {
+
+    let filtered = null
+
+    if(categoryFilter == 'All'){
+       filtered = allQuotes
+    }else if (categoryFilter == 'Active') {
+      filtered = allQuotes.filter(quote => quote.daily_for_date == null)
+    }else {
+      filtered = allQuotes.filter(quote => quote.category == categoryFilter)
+    }
+    
+    setFilteredQuotes(filtered)
+  }
+
   return(
     <div className="all">
-      <div style={{width: '80%'}}>
-        <QuoteCategories quotes={allQuotes} />
+      <div style={{width: '80%', margin: '10px 0px'}}>
+        <QuoteCategories quotes={allQuotes} handleFiltering={setFilters} />
       </div>
       <div className='quote-list-container'>
-        <QuoteList quotes={allQuotes}/>
+        { filteredQuotes.length > 0 ? (<QuoteList quotes={filteredQuotes}/>) : (<QuoteList quotes={allQuotes}/>) }
       </div>
     </div>
   );

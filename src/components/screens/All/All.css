@@ -48,6 +48,14 @@
 
 }
 
+.quote-category-item {
+  width: 140px;
+  height: 63px;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
 .favorite-button {
   margin-bottom: 100px;
 }

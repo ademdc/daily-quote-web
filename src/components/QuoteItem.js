@@ -7,9 +7,9 @@ const QuoteList = props => {
   const quoteColor = colorForCategory(quote.category)
 
   const style = {
-    borderRight: '10px',
-    borderRightColor: quoteColor,
-    borderRightStyle: 'solid'
+    borderBottom: '10px',
+    borderBottomColor: quoteColor,
+    borderBottomStyle: 'solid'
   }
 
   return (
