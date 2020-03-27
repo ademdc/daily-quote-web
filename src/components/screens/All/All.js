@@ -2,9 +2,9 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as quoteActions from '../../../store/actions/quote';
 import NotAuhtorized from '../../../components/UI/NotAuthorized';
-import { NavLink } from 'react-router-dom'
 import './All.css';
 import QuoteList from '../../QuoteList';
+import QuoteCategories from '../../QuoteCategories';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
@@ -31,7 +31,14 @@ const All = props => {
 
   return(
     <div className="all">
-      <QuoteList quotes={allQuotes}/>
+      <div style={{width: '80%'}}>
+        <hr />
+        <QuoteCategories quotes={allQuotes} />
+        <hr />
+      </div>
+      <div className='quote-list-container'>
+        <QuoteList quotes={allQuotes}/>
+      </div>
     </div>
   );
 }

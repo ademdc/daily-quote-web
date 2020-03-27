@@ -54,6 +54,18 @@
   color: white;
 }
 
+.flex-center-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .centered-column {
   display: flex;
   justify-content: center;

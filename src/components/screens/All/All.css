@@ -2,7 +2,7 @@
   text-align: center;
   display: flex;
   justify-content: flex-start;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
   min-height: 100vh;
@@ -12,6 +12,17 @@
   padding-left: 80px;
   
 }
+
+.quote-list-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #282c34;
+  color: white;
+}
+
 .quote-container {
   width: 33%;
   height: 400px;
@@ -37,6 +48,13 @@
 
 .favorite-button {
   margin-bottom: 100px;
+}
+
+.quote-statistics {
+  width: 100%;
+}
+.quote-statistics h5{
+  padding: 0px 20px;
 }
 
 
