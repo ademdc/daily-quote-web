@@ -11,22 +11,18 @@ import './Favorites.css';
 
 const Favorites = props => {
   let token = useSelector(state => state.auth.token)
-	let favoriteQuotes = useSelector(state => state.quote.favoriteQuotes)
+  let favoriteQuotes = useSelector(state => state.quote.favoriteQuotes)
+  const isLoading = useSelector(state => state.quote.isLoading);
   const [filteredQuotes, setFilteredQuotes] = useState([])
-  const [loading, setLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState('All')
   const alert = useAlert()
 	const dispatch = useDispatch();
 
-  // async function getFavQuotes() {
-  //   dispatch(quoteActions.getFavoriteQuotes());
-  // }
-
 	useEffect(() => {
 		if(token) {
       dispatch(quoteActions.getFavoriteQuotes())
-        .then(response =>  setLoading(false) )
-        .catch(err => { console.log(err); setLoading(false) } );
+        .then(response => {} )
+        .catch(err =>  { console.log(err) } );
 		}
   }, [token])
 
@@ -38,8 +34,8 @@ const Favorites = props => {
     setFilteredQuotes(filtered)
   }
   
-  if(loading) {
-    return <LoadingScreen />
+  if(isLoading) {
+    return <LoadingScreen type='lds-heart' />
   }
 
   if(!token) {

@@ -13,21 +13,16 @@ import LoadingScreen from '../../UI/LoadingScreen';
 const All = props => {
   let token = useSelector(state => state.auth.token)
   let allQuotes = useSelector(state => state.quote.allQuotes)
+  const isLoading = useSelector(state => state.quote.isLoading);
   const [filteredQuotes, setFilteredQuotes] = useState([])
-  const [activeFilter, setActiveFilter] = useState('All')
   const user = useSelector(state => state.auth.user);
-  const [loading, setLoading] = useState(true)
 
 	const dispatch = useDispatch();
-
-  // async function getAllQuotes() {
-  //   await dispatch(quoteActions.getAllQuotes());
-  // }
 
 	useEffect(() => {
 		if(token) {
       dispatch(quoteActions.getAllQuotes())
-        .then(response =>  setLoading(false) )
+        .then(response =>  {} )
         .catch(err => console.log(err));
     }
   }, [token])
@@ -66,7 +61,7 @@ const All = props => {
     'a:active': { color: '#FFFFFF' }
   })
 
-  if(loading) {
+  if(isLoading) {
     return <LoadingScreen /> 
   }
   return(

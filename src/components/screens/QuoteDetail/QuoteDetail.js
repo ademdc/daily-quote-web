@@ -1,24 +1,24 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import './QuoteDetail.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import DateTimePicker from 'react-datetime-picker';
-import Modal from 'react-modal';
 import { dayDifference } from '../../../helpers/dateHelper';
 import { redirectIfNotAuthorized } from '../../../helpers/authHelper';
 import { customModalStyles } from '../../../contants/configuration';
-import MasnicaSelect from '../../UI/MasnicaSelect';
 
-import './QuoteDetail.css';
-import * as quoteActions from '../../../store/actions/quote';
+import MasnicaSelect from '../../UI/MasnicaSelect';
 import LoadingScreen from '../../UI/LoadingScreen';
+import DateTimePicker from 'react-datetime-picker';
+import Modal from 'react-modal';
+
+import * as quoteActions from '../../../store/actions/quote';
 
 const QuoteDetail = props => {
   const { id } = useParams()
   const currentQuote = useSelector(state => state.quote.currentQuote);
   const isLoading = useSelector(state => state.quote.isLoading);
   const user = useSelector(state => state.auth.user);
-  const token = useSelector(state => state.auth.token);
   const [editedQuote, setEditedQuote] = useState(null)
   const [date, setDate] = useState(new Date())
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -39,16 +39,12 @@ const QuoteDetail = props => {
 
   const editQuoteHandler = async () => {
     const { id, category, author, text, image_url } = editedQuote
-
     await dispatch(quoteActions.updateQuote(id, category, author, text, image_url))
     alert.success('Successfully edited quote.')
     props.history.push('/quotes')
   }
   const setDailyHandler = async () => {
     const days_from_now = dayDifference(new Date(), date)
-    console.log(new Date())
-    console.log(date)
-    console.log(days_from_now)
     await dispatch(quoteActions.setNewDailyQuote(currentQuote.id, days_from_now))
     alert.success('Successfully set quote as daily.')
     props.history.push('/')

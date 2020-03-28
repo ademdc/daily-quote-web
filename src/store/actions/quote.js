@@ -70,17 +70,20 @@ export const updateQuote = (id, category, author, quoteText, imageUrl) => {
 
 export const getAllQuotes = () => {
 	return async (dispatch, getState) => {
+		dispatch(setLoading(true))
 		await axios.get(URLs.base.concat('/quotes'), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
 			}})
 			.then(quotes => {
+				dispatch(setLoading(false))
 				return dispatch({
 					type: GET_ALL_QUOTES,
 					allQuotes: quotes.data,
 				});
 			})
 			.catch(error => {
+				dispatch(setLoading(false))
 				console.log(error)
 				return false;
 		});
@@ -89,19 +92,21 @@ export const getAllQuotes = () => {
 
 export const getFavoriteQuotes = () => {
 	return async (dispatch, getState) => {
-
+		dispatch(setLoading(true))
 		await axios.get(URLs.base.concat('/quotes/favorites'), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
 			}})
 			.then(quotes => {
 				console.log(quotes.data)
+				dispatch(setLoading(false))
 				return dispatch({
 					type: GET_FAVORITE_QUOTES,
 					favoriteQuotes: quotes.data
 				});
 			})
 			.catch(error => {
+				dispatch(setLoading(false))
 				console.log(error)
 				return false;
 		});
@@ -112,7 +117,7 @@ export const getFavoriteQuotes = () => {
 
 export const getQuote = (id) => {
 	return async (dispatch, getState) => {
-		dispatch({ type: SET_LOADING, isLoading: true})
+		dispatch(setLoading(true))
 		await axios.get(URLs.base.concat(`/quotes/${id}`), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
@@ -123,11 +128,11 @@ export const getQuote = (id) => {
 				currentQuote: quote.data,
 				quote
 			});
-			dispatch({ type: SET_LOADING, isLoading: false})
+			dispatch(setLoading(false))
 			return quote.data;
 		})
 		.catch(error => {
-			dispatch({ type: SET_LOADING, isLoading: false})
+			dispatch(setLoading(false))
 			console.log(error)
 			return false;
 		});
@@ -151,15 +156,18 @@ export const deleteQuote = (id) => {
 }
 
 export const getDailyQuote = () => {
-	return dispatch => {
-		axios.get(URLs.base.concat('/quotes/daily'))
+	return async dispatch => {
+		dispatch(setLoading(true))
+		await axios.get(URLs.base.concat('/quotes/daily'))
 			.then(quote => {
+				dispatch(setLoading(false))
 				return dispatch({
 					type: GET_RANDOM_QUOTE,
 					quote: quote.data
 				});
 			})
 			.catch(error => {
+				dispatch(setLoading(false))
 				console.log(error)
 				return false;
 		});
@@ -211,10 +219,6 @@ export const setNewDailyQuote = (id, days_from_now) => {
 	}
 }
 
-// export const setLoading = (isLoading) => {
-// 	console.log('SET LOADING')
-// 	console.log(isLoading)
-// 	return async dispatch => {
-// 		await dispatch({ type: SET_LOADING, isLoading: isLoading})
-// 	}
-// }
+export const setLoading = (isLoading) => {
+	return { type: SET_LOADING, isLoading: isLoading}
+}

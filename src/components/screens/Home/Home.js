@@ -6,10 +6,12 @@ import * as quoteActions from '../../../store/actions/quote';
 import FlashMessage from 'react-flash-message'
 import * as svgs from '../../UI/svgs';
 import { useAlert } from 'react-alert'
+import LoadingScreen from '../../UI/LoadingScreen';
 
 const Home = props => {
   const token = useSelector(state => state.auth.token);
   const quote = useSelector(state => state.quote.quote);
+  const isLoading = useSelector(state => state.quote.isLoading);
   const dispatch = useDispatch();
   const alert = useAlert()
 
@@ -26,9 +28,12 @@ const Home = props => {
     alert.show('Succesfully set as favorite')
   }
 
+  if(isLoading) {
+    return <LoadingScreen />
+  }
+  
   return(
     <div className="home">
-      {/* <img height='150px' src={process.env.PUBLIC_URL + '/logo192.png'} alt=''></img> */}
       { quote &&
         (
           <div >
