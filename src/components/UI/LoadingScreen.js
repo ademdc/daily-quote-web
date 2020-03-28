@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/spinners.css'
 
 const LoadingScreen = props => {
+  // possible types: lds-ellipsis, lds-heart, lds-ripple
   const spinnerType = props.type ? props.type : 'lds-ripple'
   
   return (
