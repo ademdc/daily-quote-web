@@ -1,4 +1,5 @@
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { css } from 'glamor';
 
 export const alertOptions = {
   position: positions.TOP_CENTER,
@@ -17,3 +18,21 @@ export const customModalStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+
+export const pageLink = css({
+  margin: '2px',
+  display: 'inline-block',
+  padding: '2px',
+  WebkitBorderRadius: '20px',
+  MozBorderRadius: '20px',
+  borderRadius: '20px'
+})
+
+export const currentLink = css({
+  backgroundColor: 'lightblue',
+  display: 'inline-block',
+  color: '#FFFFFF',
+  'a:link': { color: '#FFFFFF' },
+  'a:visited': { color: '#FFFFFF' },
+  'a:active': { color: '#FFFFFF' }
+})

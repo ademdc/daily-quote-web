@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import './QuoteDetail.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAlert } from 'react-alert';
@@ -13,6 +12,8 @@ import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 
 import * as quoteActions from '../../../store/actions/quote';
+
+import './QuoteDetail.css';
 
 const QuoteDetail = props => {
   const { id } = useParams()

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Home.css';
 import { useSelector, useDispatch } from 'react-redux';
-import * as quoteActions from '../../../store/actions/quote';
-import FlashMessage from 'react-flash-message'
-import * as svgs from '../../UI/svgs';
 import { useAlert } from 'react-alert'
+
 import LoadingScreen from '../../UI/LoadingScreen';
+
+import * as quoteActions from '../../../store/actions/quote';
+
+import './Home.css';
 
 const Home = props => {
   const token = useSelector(state => state.auth.token);
@@ -31,7 +31,7 @@ const Home = props => {
   if(isLoading) {
     return <LoadingScreen />
   }
-  
+
   return(
     <div className="home">
       { quote &&

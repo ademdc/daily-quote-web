@@ -14,7 +14,8 @@ export const SET_LOADING = 'SET_LOADING'
 
 export const newQuote = (category, author, quoteText, imageUrl) => {
 	return async (dispatch, getState) => {
-		axios.post(URLs.base.concat('/quotes'), {
+		dispatch(setLoading(true))
+		await axios.post(URLs.base.concat('/quotes'), {
 			quote: {
 				text:  quoteText,
 				author: author,
@@ -26,16 +27,16 @@ export const newQuote = (category, author, quoteText, imageUrl) => {
 				Authorization: 'Bearer ' + getState().auth.token
 			}})
 			.then(quote => {
-				console.log(quote.data)
+				dispatch(setLoading(false))
 				return dispatch({
 					type: CREATE_NEW_QUOTE,
 					quote
 				});
 			})
 			.catch(error => {
-				console.log('quote error')
+				dispatch(setLoading(false))
 				console.log(error)
-				return false;
+				throw new Error('Something went wrong')
 		});
 	}
 }

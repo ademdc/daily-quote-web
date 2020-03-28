@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import * as quoteActions from '../../../store/actions/quote';
-import QuoteList from '../../QuoteList';
-import QuoteCategories from '../../QuoteCategories';
 import { setFilters } from '../../../helpers/quoteHelper';
 import { useAlert } from 'react-alert'
+
 import LoadingScreen from '../../UI/LoadingScreen';
+import QuoteList from '../../QuoteList';
+import QuoteCategories from '../../QuoteCategories';
+
+import * as quoteActions from '../../../store/actions/quote';
 
 import './Favorites.css';
 
@@ -14,7 +16,6 @@ const Favorites = props => {
   let favoriteQuotes = useSelector(state => state.quote.favoriteQuotes)
   const isLoading = useSelector(state => state.quote.isLoading);
   const [filteredQuotes, setFilteredQuotes] = useState([])
-  const [activeFilter, setActiveFilter] = useState('All')
   const alert = useAlert()
 	const dispatch = useDispatch();
 

@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import * as quoteActions from '../../../store/actions/quote';
+import { setFilters } from '../../../helpers/quoteHelper';
+import { currentLink, pageLink } from '../../../contants/configuration';
+
+import Pagination from 'pagination-component';
+import LoadingScreen from '../../UI/LoadingScreen';
 import NotAuhtorized from '../../../components/UI/NotAuthorized';
-import './All.css';
 import QuoteList from '../../QuoteList';
 import QuoteCategories from '../../QuoteCategories';
-import { setFilters } from '../../../helpers/quoteHelper';
-import Pagination from 'pagination-component';
-import { css } from 'glamor';
-import LoadingScreen from '../../UI/LoadingScreen';
+
+import * as quoteActions from '../../../store/actions/quote';
+
+import './All.css';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
@@ -42,24 +45,6 @@ const All = props => {
   const changePage = (page) => {
     console.log(page)
   }
-  
-  const pageLink = css({
-    margin: '2px',
-    display: 'inline-block',
-    padding: '2px',
-    WebkitBorderRadius: '20px',
-    MozBorderRadius: '20px',
-    borderRadius: '20px'
-  })
-  
-  const currentLink = css({
-    backgroundColor: 'lightblue',
-    display: 'inline-block',
-    color: '#FFFFFF',
-    'a:link': { color: '#FFFFFF' },
-    'a:visited': { color: '#FFFFFF' },
-    'a:active': { color: '#FFFFFF' }
-  })
 
   if(isLoading) {
     return <LoadingScreen /> 
