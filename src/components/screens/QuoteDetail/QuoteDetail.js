@@ -11,11 +11,14 @@ import MasnicaSelect from '../../UI/MasnicaSelect';
 
 import './QuoteDetail.css';
 import * as quoteActions from '../../../store/actions/quote';
+import LoadingScreen from '../../UI/LoadingScreen';
 
 const QuoteDetail = props => {
   const { id } = useParams()
   const currentQuote = useSelector(state => state.quote.currentQuote);
+  const isLoading = useSelector(state => state.quote.isLoading);
   const user = useSelector(state => state.auth.user);
+  const token = useSelector(state => state.auth.token);
   const [editedQuote, setEditedQuote] = useState(null)
   const [date, setDate] = useState(new Date())
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -23,10 +26,12 @@ const QuoteDetail = props => {
   const alert = useAlert()
 
   useEffect(() => {
-    redirectIfNotAuthorized(user, props)
-    dispatch(quoteActions.getQuote(id))
-    Modal.setAppElement('#modal')
-  },[])
+    if(user) {
+     redirectIfNotAuthorized(user, props)
+      dispatch(quoteActions.getQuote(id))
+      Modal.setAppElement('#modal')
+   }
+  },[user])
 
   useEffect(() => {
     setEditedQuote({...currentQuote})
@@ -64,6 +69,9 @@ const QuoteDetail = props => {
     setModalIsOpen(false);
   }
 
+  if(isLoading) {
+    return <LoadingScreen />
+  }
   return(
     <div className={`centered-column`}>
       {currentQuote && editedQuote && (

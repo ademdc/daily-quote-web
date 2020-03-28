@@ -5,6 +5,7 @@ import QuoteList from '../../QuoteList';
 import QuoteCategories from '../../QuoteCategories';
 import { setFilters } from '../../../helpers/quoteHelper';
 import { useAlert } from 'react-alert'
+import LoadingScreen from '../../UI/LoadingScreen';
 
 import './Favorites.css';
 
@@ -12,19 +13,22 @@ const Favorites = props => {
   let token = useSelector(state => state.auth.token)
 	let favoriteQuotes = useSelector(state => state.quote.favoriteQuotes)
   const [filteredQuotes, setFilteredQuotes] = useState([])
+  const [loading, setLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState('All')
   const alert = useAlert()
 	const dispatch = useDispatch();
 
-  async function getFavQuotes() {
-    dispatch(quoteActions.getFavoriteQuotes());
-  }
+  // async function getFavQuotes() {
+  //   dispatch(quoteActions.getFavoriteQuotes());
+  // }
 
 	useEffect(() => {
 		if(token) {
-    	getFavQuotes()
+      dispatch(quoteActions.getFavoriteQuotes())
+        .then(response =>  setLoading(false) )
+        .catch(err => { console.log(err); setLoading(false) } );
 		}
-  }, [])
+  }, [token])
 
   const setFiltersHandler = (categoryFilter) => {
     const filtered = setFilters(favoriteQuotes, categoryFilter)
@@ -34,6 +38,10 @@ const Favorites = props => {
     setFilteredQuotes(filtered)
   }
   
+  if(loading) {
+    return <LoadingScreen />
+  }
+
   if(!token) {
     return (
       <div className="centered">

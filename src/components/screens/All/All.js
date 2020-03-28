@@ -6,7 +6,9 @@ import './All.css';
 import QuoteList from '../../QuoteList';
 import QuoteCategories from '../../QuoteCategories';
 import { setFilters } from '../../../helpers/quoteHelper';
-import { renderIfNotAuthorized } from '../../../helpers/authHelper';
+import Pagination from 'pagination-component';
+import { css } from 'glamor';
+import LoadingScreen from '../../UI/LoadingScreen';
 
 const All = props => {
   let token = useSelector(state => state.auth.token)
@@ -14,20 +16,23 @@ const All = props => {
   const [filteredQuotes, setFilteredQuotes] = useState([])
   const [activeFilter, setActiveFilter] = useState('All')
   const user = useSelector(state => state.auth.user);
+  const [loading, setLoading] = useState(true)
 
 	const dispatch = useDispatch();
 
-  async function getAllQuotes() {
-    await dispatch(quoteActions.getAllQuotes());
-  }
+  // async function getAllQuotes() {
+  //   await dispatch(quoteActions.getAllQuotes());
+  // }
 
 	useEffect(() => {
-    
 		if(token) {
-      getAllQuotes()
-		}
-  }, [])
+      dispatch(quoteActions.getAllQuotes())
+        .then(response =>  setLoading(false) )
+        .catch(err => console.log(err));
+    }
+  }, [token])
 
+  
   if(user) {
     if(!user.is_admin) {
       return <NotAuhtorized />
@@ -39,8 +44,40 @@ const All = props => {
     setFilteredQuotes(filtered)
   }
 
+  const changePage = (page) => {
+    console.log(page)
+  }
+  
+  const pageLink = css({
+    margin: '2px',
+    display: 'inline-block',
+    padding: '2px',
+    WebkitBorderRadius: '20px',
+    MozBorderRadius: '20px',
+    borderRadius: '20px'
+  })
+  
+  const currentLink = css({
+    backgroundColor: 'lightblue',
+    display: 'inline-block',
+    color: '#FFFFFF',
+    'a:link': { color: '#FFFFFF' },
+    'a:visited': { color: '#FFFFFF' },
+    'a:active': { color: '#FFFFFF' }
+  })
+
+  if(loading) {
+    return <LoadingScreen /> 
+  }
   return(
     <div className="all">
+      {/* <Pagination currentPage={0}
+                 pageCount={10}
+                 pageLinkClassName={pageLink}
+                 currentLinkClassName={currentLink}
+                 onPageClick={i => {
+                  console.log(`Link to page ${i} was clicked.`);
+                 }} /> */}
       <div style={{width: '80%', margin: '10px 0px'}}>
         <QuoteCategories quotes={allQuotes} handleFiltering={setFiltersHandler} hasActive={true}/>
       </div>

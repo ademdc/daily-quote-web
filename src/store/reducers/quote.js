@@ -1,11 +1,12 @@
-import { GET_QUOTE, GET_ALL_QUOTES, EDIT_QUOTE, SET_DAILY_QUOTE, GET_RANDOM_QUOTE, GET_FAVORITE_QUOTES, SET_FAVORITE_QUOTE, CREATE_NEW_QUOTE } from '../actions/quote';
+import { GET_QUOTE, GET_ALL_QUOTES, EDIT_QUOTE, SET_DAILY_QUOTE, SET_LOADING, GET_RANDOM_QUOTE, GET_FAVORITE_QUOTES, SET_FAVORITE_QUOTE, CREATE_NEW_QUOTE } from '../actions/quote';
 
 const innitialState = {
 	quote: null,
 	favoriteQuotes: [],
 	quotes: [],
 	allQuotes: [],
-	currentQuote: null
+	currentQuote: null,
+	isLoading: false
 }
 
 const quoteReducer = (state = innitialState, action) => {
@@ -22,6 +23,8 @@ const quoteReducer = (state = innitialState, action) => {
 				return { ...state, favoriteQuotes: [...state.favoriteQuotes, action.favoriteQuote] }
 			case SET_DAILY_QUOTE: 
 				return { ...state, quote: action.quote}
+			case SET_LOADING:
+				return { ...state, isLoading: action.isLoading}
 			case CREATE_NEW_QUOTE:
 				return state;
 			case EDIT_QUOTE:

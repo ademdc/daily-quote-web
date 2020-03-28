@@ -10,6 +10,7 @@ export const SET_FAVORITE_QUOTE = 'SET_FAVORITE_QUOTE';
 export const CREATE_NEW_QUOTE = 'CREATE_NEW_QUOTE'
 export const SET_DAILY_QUOTE = 'SET_DAILY_QUOTE'
 export const DELETE_QUOTE = 'DELETE_QUOTE'
+export const SET_LOADING = 'SET_LOADING'
 
 export const newQuote = (category, author, quoteText, imageUrl) => {
 	return async (dispatch, getState) => {
@@ -40,8 +41,9 @@ export const newQuote = (category, author, quoteText, imageUrl) => {
 }
 
 export const updateQuote = (id, category, author, quoteText, imageUrl) => {
+	
 	return async (dispatch, getState) => {
-		axios.patch(URLs.base.concat(`/quotes/${id}`), {
+		await axios.patch(URLs.base.concat(`/quotes/${id}`), {
 			id: id,
 			quote: {
 				text:  quoteText,
@@ -55,10 +57,9 @@ export const updateQuote = (id, category, author, quoteText, imageUrl) => {
 			}})
 			.then(quote => {
 				console.log(quote.data)
-				
 				return dispatch({
 					type: EDIT_QUOTE
-				});
+				}); 
 			})
 			.catch(error => {
 				console.log(error)
@@ -69,7 +70,7 @@ export const updateQuote = (id, category, author, quoteText, imageUrl) => {
 
 export const getAllQuotes = () => {
 	return async (dispatch, getState) => {
-		axios.get(URLs.base.concat('/quotes'), {
+		await axios.get(URLs.base.concat('/quotes'), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
 			}})
@@ -87,8 +88,9 @@ export const getAllQuotes = () => {
 }
 
 export const getFavoriteQuotes = () => {
-	return (dispatch, getState) => {
-		axios.get(URLs.base.concat('/quotes/favorites'), {
+	return async (dispatch, getState) => {
+
+		await axios.get(URLs.base.concat('/quotes/favorites'), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
 			}})
@@ -103,11 +105,14 @@ export const getFavoriteQuotes = () => {
 				console.log(error)
 				return false;
 		});
+
+		console.log('adad')
 	}
 }
 
 export const getQuote = (id) => {
 	return async (dispatch, getState) => {
+		dispatch({ type: SET_LOADING, isLoading: true})
 		await axios.get(URLs.base.concat(`/quotes/${id}`), {
 			headers: {
 				Authorization: 'Bearer ' + getState().auth.token
@@ -118,10 +123,11 @@ export const getQuote = (id) => {
 				currentQuote: quote.data,
 				quote
 			});
-
+			dispatch({ type: SET_LOADING, isLoading: false})
 			return quote.data;
 		})
 		.catch(error => {
+			dispatch({ type: SET_LOADING, isLoading: false})
 			console.log(error)
 			return false;
 		});
@@ -204,3 +210,11 @@ export const setNewDailyQuote = (id, days_from_now) => {
 		});
 	}
 }
+
+// export const setLoading = (isLoading) => {
+// 	console.log('SET LOADING')
+// 	console.log(isLoading)
+// 	return async dispatch => {
+// 		await dispatch({ type: SET_LOADING, isLoading: isLoading})
+// 	}
+// }
