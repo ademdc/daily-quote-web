@@ -16,7 +16,7 @@ export const login = (email, password) => {
 	return async dispatch => {
 		let response = await axios.post(URLs.base.concat('/login'), { users: { email: email, password: password }});
 
-		if(response.status != 200) {
+		if(response.status !== 200) {
 			console.log("IN FAIL LOGIN")
 			throw new Error('Something went wrong')
 		}
@@ -31,7 +31,7 @@ export const signUp = (email, password) => {
 	return async dispatch => {
 		let response = await axios.post(URLs.base.concat('/signup'), { users: { email: email, password: password }});
 
-		if(response.status != 200) {
+		if(response.status !== 200) {
 			console.log("IN FAIL SIGNUP")
 			throw new Error('Something went wrong')
 		}

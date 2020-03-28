@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useEffect } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Navbar from './components/navbar/Navbar';
 import Home from './components/screens/Home/Home';
 import Favorites from './components/screens/Favorites/Favorites';
@@ -14,17 +13,19 @@ import QuoteDetail from './components/screens/QuoteDetail/QuoteDetail';
 
 import * as authActions from './store/actions/auth';
 
+import './App.css';
+
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(state => state.auth.token)
 
-  async function tryLogin() {
-    await dispatch(authActions.checkAutoLogin())
-  }
-
   useEffect(() => {
+    const tryLogin = async() => {
+      dispatch(authActions.checkAutoLogin())
+    }
+
     tryLogin();
-  }, []);
+  }, [dispatch]);
 
   let routes = (
     <Switch>

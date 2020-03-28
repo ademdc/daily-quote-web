@@ -1,5 +1,3 @@
-import { quoteCategories } from '../helpers/quoteHelper';
-
 export const colors = {
     blueLight: '#CFDBE1',
     blueMain: '#415171',

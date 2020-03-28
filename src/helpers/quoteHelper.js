@@ -12,18 +12,18 @@ export const colorForCategory = (category) => {
 }
 
 export const filterByCategory = (quotes, category) => {
-  return quotes.filter(quote => quote.category == category)
+  return quotes.filter(quote => quote.category === category)
 }
 
 export const setFilters = (quotes, categoryFilter) => {
   let filtered = null
 
-  if(categoryFilter == 'All'){
+  if(categoryFilter === 'All'){
      filtered = quotes
-  }else if (categoryFilter == 'Active') {
-    filtered = quotes.filter(quote => quote.daily_for_date == null)
+  }else if (categoryFilter === 'Active') {
+    filtered = quotes.filter(quote => quote.daily_for_date === null)
   }else {
-    filtered = quotes.filter(quote => quote.category == categoryFilter)
+    filtered = quotes.filter(quote => quote.category === categoryFilter)
   }
 
   return filtered;

@@ -53,7 +53,7 @@ const Auth = (props) => {
           </div>
           {imageUrl && (
               <div style={{overflow: 'hidden', height: 'auto', width: '50%'}}>
-                <img width='100%' height='100%' src={imageUrl}></img>
+                <img width='100%' height='100%' src={imageUrl} alt=''></img>
             </div>
             )}          
       </div>

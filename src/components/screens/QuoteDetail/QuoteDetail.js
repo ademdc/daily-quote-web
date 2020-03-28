@@ -30,9 +30,9 @@ const QuoteDetail = props => {
     if(user) {
      redirectIfNotAuthorized(user, props)
       dispatch(quoteActions.getQuote(id))
-      Modal.setAppElement('#modal')
+      // Modal.setAppElement('#modal')
    }
-  },[user])
+  },[user, dispatch, id, props])
 
   useEffect(() => {
     setEditedQuote({...currentQuote})
@@ -78,7 +78,7 @@ const QuoteDetail = props => {
           )}
           
           <div style={{overflow: 'hidden', height: 'auto', width: '50%'}}>
-            <img width='100%' height='100%' src={editedQuote.image_url}></img>
+            <img width='100%' height='100%' src={editedQuote.image_url} alt=''></img>
           </div>
           
           <div className='form-group' style={{width: '50%'}}>

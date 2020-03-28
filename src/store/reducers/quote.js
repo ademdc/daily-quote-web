@@ -32,7 +32,6 @@ const quoteReducer = (state = innitialState, action) => {
 			default:
 				return state;
     }
-  return state;
 }
 
 export default quoteReducer;

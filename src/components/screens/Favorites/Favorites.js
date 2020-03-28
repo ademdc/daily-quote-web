@@ -25,11 +25,11 @@ const Favorites = props => {
         .then(response => {} )
         .catch(err =>  { console.log(err) } );
 		}
-  }, [token])
+  }, [token, dispatch])
 
   const setFiltersHandler = (categoryFilter) => {
     const filtered = setFilters(favoriteQuotes, categoryFilter)
-    if(filtered.length == 0) {
+    if(filtered.length === 0) {
       alert.info('No filtered results.')
     }
     setFilteredQuotes(filtered)

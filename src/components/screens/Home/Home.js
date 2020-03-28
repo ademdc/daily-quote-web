@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert'
 
@@ -15,13 +15,10 @@ const Home = props => {
   const dispatch = useDispatch();
   const alert = useAlert()
 
-  async function getDailyQuote() {
-    dispatch(quoteActions.getDailyQuote());
-  }
-
 	useEffect(() => {
+    const getDailyQuote = async() =>  dispatch(quoteActions.getDailyQuote());
     getDailyQuote()
-  }, [])
+  }, [dispatch])
 
   const setAsFavorite = (quote) => {
     dispatch(quoteActions.setFavoriteQuote(quote))

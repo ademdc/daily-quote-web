@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setFilters } from '../../../helpers/quoteHelper';
-import { currentLink, pageLink } from '../../../contants/configuration';
+// import { currentLink, pageLink } from '../../../contants/configuration';
 
-import Pagination from 'pagination-component';
+// import Pagination from 'pagination-component';
 import LoadingScreen from '../../UI/LoadingScreen';
 import NotAuhtorized from '../../../components/UI/NotAuthorized';
 import QuoteList from '../../QuoteList';
@@ -28,7 +28,7 @@ const All = props => {
         .then(response =>  {} )
         .catch(err => console.log(err));
     }
-  }, [token])
+  }, [token, dispatch])
 
   
   if(user) {
@@ -42,9 +42,9 @@ const All = props => {
     setFilteredQuotes(filtered)
   }
 
-  const changePage = (page) => {
-    console.log(page)
-  }
+  // const changePage = (page) => {
+  //   console.log(page)
+  // }
 
   if(isLoading) {
     return <LoadingScreen /> 

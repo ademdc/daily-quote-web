@@ -1,7 +1,8 @@
 import React from 'react';
 import { quoteCategories } from '../helpers/quoteHelper';
-import QuoteCategory from './QuoteCategory';
 import { filterByCategory } from '../helpers/quoteHelper';
+
+import QuoteCategory from './QuoteCategory';
 
 const QuoteCategories = props => {  
   const activeQuotes = props.quotes.filter(quote => quote.daily_for_date == null)
@@ -13,7 +14,7 @@ const QuoteCategories = props => {
       
       {Object.values(quoteCategories).map(category => {
         var value = filterByCategory(props.quotes, category).length
-        if(value == 0) { return null }
+        if(value === 0) { return null }
 
         return (
           <QuoteCategory 

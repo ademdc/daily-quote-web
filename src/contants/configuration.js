@@ -1,4 +1,4 @@
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { transitions, positions } from 'react-alert'
 import { css } from 'glamor';
 
 export const alertOptions = {
