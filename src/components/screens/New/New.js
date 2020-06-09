@@ -11,7 +11,7 @@ import * as quoteActions from '../../../store/actions/quote';
 import './New.css';
 
 const Auth = (props) => {
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Love');
 	const [author, setAuthor] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [quoteText, setQuoteText] = useState('');
