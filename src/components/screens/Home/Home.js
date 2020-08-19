@@ -5,6 +5,7 @@ import { useAlert } from 'react-alert'
 import LoadingScreen from '../../UI/LoadingScreen';
 
 import * as quoteActions from '../../../store/actions/quote';
+import * as authActions from '../../../store/actions/auth';
 
 import './Home.css';
 
@@ -16,6 +17,12 @@ const Home = props => {
   const alert = useAlert()
 
 	useEffect(() => {
+    const tryLogin = async () => {
+      dispatch(authActions.checkAutoLogin())
+    }
+
+    tryLogin();
+
     const getDailyQuote = async() =>  dispatch(quoteActions.getDailyQuote());
     getDailyQuote()
   }, [dispatch])
@@ -27,6 +34,14 @@ const Home = props => {
 
   if(isLoading) {
     return <LoadingScreen />
+  }
+
+  if(!quote) {
+    return (
+      <div className="centered">
+        <p>Log in to see favorites.</p>
+      </div>
+    )
   }
 
   return(

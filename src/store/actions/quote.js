@@ -157,9 +157,13 @@ export const deleteQuote = (id) => {
 }
 
 export const getDailyQuote = () => {
-	return async dispatch => {
+	return async (dispatch, getState) => {
 		dispatch(setLoading(true))
-		await axios.get(URLs.base.concat('/quotes/daily'))
+		await axios.get(URLs.base.concat('/quotes/daily'), {
+			headers: {
+				Authorization: 'Bearer ' + getState().auth.token
+			}}
+		)
 			.then(quote => {
 				dispatch(setLoading(false))
 				return dispatch({
