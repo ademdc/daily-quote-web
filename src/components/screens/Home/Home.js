@@ -39,7 +39,7 @@ const Home = props => {
   if(!quote) {
     return (
       <div className="centered">
-        <p>Log in to see favorites.</p>
+        <p>Log in to see daily quote</p>
       </div>
     )
   }

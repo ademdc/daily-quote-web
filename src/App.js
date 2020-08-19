@@ -10,6 +10,8 @@ import Logout from './components/screens/Auth/Logout';
 import New from './components/screens/New/New';
 import All from './components/screens/All/All';
 import QuoteDetail from './components/screens/QuoteDetail/QuoteDetail';
+import Admin from './components/screens/Admin/Admin';
+import User from './components/screens/User/User';
 
 import * as authActions from './store/actions/auth';
 
@@ -35,6 +37,8 @@ function App() {
         <Route path='/new' component={New} />
         <Route path='/auth' component= {Auth}/>
         <Route path='/favorites' component= {Favorites}/>
+        <Route path='/admin' component= {Admin}/>
+        <Route path='/user/:id' component= {User}/>
         <Route path='/' exact component= {Home}/>
         <Redirect to='/'/>
     </Switch>

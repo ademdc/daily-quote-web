@@ -16,6 +16,7 @@ const Navbar = (props) => {
             <NavItem href='/favorites' text='Favorites' svg={svgs.starIcon}/>
             {props.isAuthenticated ? (<NavItem href='/new' text='New Quote' svg={svgs.plusIcon}/>) : null }
             {props.isAuthenticated ? (<NavItem href='/quotes' text='All Quotes' svg={svgs.serachIcon}/>) : null }
+            {props.isAuthenticated ? (<NavItem href='/admin' text='Admin' svg={svgs.adminIcon}/>) : null }
             {props.isAuthenticated ? (
               <NavItem href='/logout' text='Logout' svg={svgs.logoutIcon}/>
             ) : (
