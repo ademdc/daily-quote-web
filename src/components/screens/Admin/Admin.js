@@ -37,7 +37,9 @@ const Admin = props => {
       { users &&
         (
           <div className='quote-list-container'>
-            { users.map((user,i) => <NavLink key={i} to={`/user/${user.id}`}>{user.email}</NavLink>) }
+            <ol>
+              { users.map((user,i) => <li><NavLink className='list-item' key={i} to={`/user/${user.id}`}>{user.email}</NavLink></li>) }
+            </ol>
           </div>
         )
       }

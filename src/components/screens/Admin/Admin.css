@@ -67,6 +67,10 @@
   padding: 0px 20px;
 }
 
+.list-item {
+  color: white;
+}
+
 
 @media screen and (max-width: 1000px) {
   .quote-container {
