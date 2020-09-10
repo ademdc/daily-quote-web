@@ -58,7 +58,7 @@ const All = props => {
                  onPageClick={i => {
                   console.log(`Link to page ${i} was clicked.`);
                  }} /> */}
-      <div style={{width: '80%', margin: '10px 0px'}}>
+      <div style={{width: '95%', margin: '10px 0px'}}>
         <QuoteCategories quotes={allQuotes} handleFiltering={setFiltersHandler} hasActive={true}/>
       </div>
       <div className='quote-list-container'>

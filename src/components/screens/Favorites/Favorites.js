@@ -48,7 +48,7 @@ const Favorites = props => {
   }
   return(
     <div className="favorites">
-      <div style={{width: '80%', margin: '10px 0px'}}>
+      <div style={{width: '95%', margin: '10px 0px'}}>
         <QuoteCategories quotes={favoriteQuotes} handleFiltering={setFiltersHandler} />
       </div>
       { filteredQuotes.length > 0 ? (<QuoteList quotes={filteredQuotes}/>) : (<QuoteList quotes={favoriteQuotes}/>) }
