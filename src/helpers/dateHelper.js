@@ -1,21 +1,15 @@
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 export const dateSameDay = (date1, date2) => {
-  const date1Day   = date1.getDay()
-  const date2Day   = date2.getDay()
-  return date1Day === date2Day
+  return date1.getDay() === date2.getDay()
 }
 
 export const dateSameMonth = (date1, date2) => {
-  const date1Day   = date1.getMonth()
-  const date2Day   = date2.getMonth()
-  return date1Day === date2Day
+  return date1.getMonth() === date2.getMonth()
 }
 
 export const dateSameYear = (date1, date2) => {
-  const date1Day   = date1.getFullYear()
-  const date2Day   = date2.getFullYear()
-  return date1Day === date2Day
+  return date1.getFullYear() === date2.getFullYear()
 }
 
 export const isSameDate = (date1, date2) => {

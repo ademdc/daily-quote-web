@@ -41,11 +41,11 @@ const Auth = (props) => {
     if(isLoading) {
       return <LoadingScreen />
     }
-
+    
     return(
       <div className='new centered-column'>
           <div className='form-group'>
-            <MasnicaSelect category={category} onChange={e => setCategory(e.target.value)}/>
+            <MasnicaSelect value={category} onChange={e => setCategory(e.target.value)}/>
             <input className='input' type='text' placeholder='Author' value={author} onChange={e => setAuthor(e.target.value)}/>
             <textarea cols={10} className='text-area-input' type='text' placeholder='Text' value={quoteText} onChange={e => setQuoteText(e.target.value)}/>
             <input className='input' type='text' placeholder='Image URL' value={imageUrl} onChange={e => setImageUrl(e.target.value)}/>

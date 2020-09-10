@@ -4,7 +4,9 @@ export const quoteCategories = {
   love: 'Love',
   traveling: 'Traveling',
   motivational: 'Motivational',
-  religion: 'Religion'
+  religion: 'Religion',
+  wisdom: 'Wisdom',
+  other: 'Other'
 }
 
 export const colorForCategory = (category) => {

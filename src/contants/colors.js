@@ -15,5 +15,7 @@ export const categoryColors = {
     'Love': colors.lightRed,
     'Traveling': colors.blueLight,
     'Motivational': colors.lightGreen,
-    'Religion': colors.darkGreen
+    'Religion': colors.darkGreen,
+    'Wisdom': colors.blueMain, 
+    'Other': colors.babyRose
 }
